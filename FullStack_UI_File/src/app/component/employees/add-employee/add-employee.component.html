@@ -1,0 +1,51 @@
+<div class="container my-5" style="background-color: cadetblue;">
+  <h1 class="mb-3">Add New Employee</h1>
+  <div class="row">
+    <div class="col-6">
+      <form #form="ngForm" (ngSubmit)="addEmployee()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" placeholder="Name" class="form-control " id="name" name="name"
+            [(ngModel)]="addEmployeeRequest.name" required #name="ngModel">
+            <!-- [(ngModel)] is a property binding syntax -->
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors?.['required']">
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" placeholder="Email" class="form-control" id="email" name="email"
+            [(ngModel)]="addEmployeeRequest.email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            #email="ngModel">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <div *ngIf="email.errors?.['required']">
+              Email is required.
+            </div>
+            <div *ngIf="email.errors?.['pattern']">
+              Invalid email format
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="number" placeholder="Number" class="form-control" id="phone" name="phone"
+            [(ngModel)]="addEmployeeRequest.phone" required>
+        </div>
+        <div class="mb-3">
+          <label for="salary" class="form-label">Salary</label>
+          <input type="number" placeholder="Salary" class="form-control" id="salary" name="salary"
+            [(ngModel)]="addEmployeeRequest.salary" required>
+        </div>
+        <div class="mb-3">
+          <label for="department" class="form-label">Department</label>
+          <input type="text" placeholder="Department" class="form-control" id="department" name="department"
+            [(ngModel)]="addEmployeeRequest.department" required>
+        </div>
+        <button [disabled]="!form.form.valid" type="submit" class="btn btn-primary mb-3"
+          style="margin-left: 45%;">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

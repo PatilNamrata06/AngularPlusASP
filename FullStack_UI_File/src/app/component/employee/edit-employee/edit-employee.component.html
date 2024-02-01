@@ -1,0 +1,65 @@
+<div class="container my-5" style="background-color: cadetblue;">
+  <h1 class="mb-3">Edit Employee</h1>
+  <div class="row">
+    <div class="col-6">
+      <form #form="ngForm">
+        <div class="mb-3">
+          <label for="id" class="form-label">Id</label>
+          <input type="text" class="form-control" id="id" readonly name="id" [(ngModel)]="employeeDetails.id">
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="employeeDetails.name" required
+            #name="ngModel">
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors?.['required']">
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="employeeDetails.email" required
+            #email="ngModel">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+            <div *ngIf="email.errors?.['required']">
+              Email is required.
+            </div>
+            <div *ngIf="email.errors?.['pattern']">
+              Invalid email format
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="number" class="form-control" id="phone" name="phone" [(ngModel)]="employeeDetails.phone" required
+            pattern="^((\\+91-?)|0)?[0-9]{10}$" #phone="ngModel">
+        </div>
+        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+          <div *ngIf="phone.errors?.['required']">
+            Mobile Number is required.
+          </div>
+          <div *ngIf="phone.errors?.['pattern']">
+            Invalid Mobile Number format
+          </div>
+          <div *ngIf="phone.errors?.['minlength']">
+            Password should contain atleast 8 characters
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="salary" class="form-label">Salary</label>
+          <input type="number" class="form-control" id="salary" name="salary" [(ngModel)]="employeeDetails.salary">
+        </div>
+        <div class="mb-3">
+          <label for="department" class="form-label">Department</label>
+          <input type="text" class="form-control" id="department" name="department"
+            [(ngModel)]="employeeDetails.department">
+        </div>
+        <button [disabled]="!form.form.valid" type="submit" class="btn btn-primary mr-5 mb-3"
+          (click)="updateEmployee()">Save</button>
+        <button type="button" class="btn btn-danger mb-3" (click)="deleteEmployee(employeeDetails.id)"
+          style="margin-left: 5px;">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>

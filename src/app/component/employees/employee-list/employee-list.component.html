@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="outer"> 
+     <!-- <button (click)="printThisPage()" style="margin-left: 45%; margin-top: 5px; background-color:darkslategrey;"><a style="color: white; font-size: 30px;"><i class="bi bi-printer-fill">Print</i></a></button> -->
+<div class="container my-5">
+    <h1 class="mb-2 text-center text-info">Employee Details</h1>
+    <table border="solid black 3px" class="table table-responsive table-striped" *ngIf="employees && employees.
+    length > 0">
+        <thead>
+            <tr>
+                <tr class="bg-dark p-2">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Salary</th>
+                <th>Department</th>
+                <th>Action</th>
+                </tr>
+        </thead>
+        <tbody>
+             <tr *ngFor="let employee of employees "> <!--employees is public variable which is define inside ts file and {{}} this is string interpolation syntax -->
+            <td>{{employee.id}}</td> 
+            <td>{{employee.name}}</td>
+            <td>{{employee.email}}</td>
+            <td>{{employee.phone}}</td>
+            <td>{{employee.salary}}</td>
+            <td>{{employee.department}}</td>
+            
+            <td><a [routerLink]="['/employees','edit',employee.id]" style="color:
+            coral; font-size: 30px; "><i class="bi bi-pencil-square"></i></a></td>
+            <!-- <td><a style="color:darkseagreen; font-size: 30px;"><i class="bi bi-printer-fill"></i></a></td>
+          <td></td> -->
+               
+        </tr>
+        </tbody>
+    </table>
+    <p *ngIf="!employees || employees.length <= 0">No employees found</p>
+</div>
+</div>
+</body>
+</html>
